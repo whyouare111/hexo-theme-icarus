@@ -18,13 +18,6 @@ module.exports = class extends Component {
                 fold = article.highlight.fold;
             }
         }
-        // for (var k in config) {
-        //     console.log('config key:' + k);
-        // }
-        // console.log('config.fanlocker:' + config.fanlocker);
-        // for (var k in config.matataki) {
-        //     console.log('config.matataki key:' + k);
-        // }
 
         const embeddedConfig = `var IcarusThemeSettings = {
             article: {
@@ -34,16 +27,11 @@ module.exports = class extends Component {
                 }
             }
         };
-        var fl = new FanLocker({
-            clientId: '${config.matataki.clientId}',
-            clientSecret: '${config.matataki.clientSecret}'
-          });
         `;
 
         return <Fragment>
             <script src={cdn('jquery', '3.3.1', 'dist/jquery.min.js')}></script>
-            <script src={cdn('moment', '2.22.2', 'min/moment-with-locales.min.js')}></script>
-            <script src="https://unpkg.com/fanlocker@latest/dist/fanlocker.js"></script>
+            <script src={cdn('moment', '2.22.2', 'min/moment-with-locales.min.js')}></script>            
             {clipboard && <script src={cdn('clipboard', '2.0.4', 'dist/clipboard.min.js')} async></script>}
             <script dangerouslySetInnerHTML={{ __html: `moment.locale("${language}");` }}></script>
             <script dangerouslySetInnerHTML={{ __html: embeddedConfig }}></script>

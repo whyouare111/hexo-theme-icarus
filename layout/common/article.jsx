@@ -120,6 +120,12 @@ module.exports = class extends Component {
             </nav> : null}
             {/* Comment */}
             {!index ? <Comment config={config} page={page} helper={helper} /> : null}
+            {config.plugins.matataki && config.matataki ? <script src="https://unpkg.com/fanlocker@latest/dist/fanlocker.js"></script>  : null }
+            {config.plugins.matataki && config.matataki  ? <script dangerouslySetInnerHTML={{ __html: `var fl = new FanLocker({
+            clientId: '${config.plugins.matataki.clientId}',
+            clientSecret: '${config.plugins.matataki.clientSecret}'
+        });     
+        ` }}></script>   : null }
         </Fragment>;
     }
 };
