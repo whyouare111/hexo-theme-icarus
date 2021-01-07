@@ -3,10 +3,10 @@ const { cacheComponent } = require('hexo-component-inferno/lib/util/cache');
 
 class Matataki extends Component {
     render() {
-        const { config, plugin } = this.props;
+        const { page, plugin } = this.props;
 
 
-        if (plugin.clientId && plugin.clientSecret && config.matataki) {
+        if (plugin.clientId && plugin.clientSecret && page.matataki && page.matataki.token) {
 
             //cdnjs等并没有包含fanLocker.js, 所以还是不直接用cdn配置，而是另外指定
             const fanLockerJsUrl = plugin.fanLockerJsUrl ? plugin.fanLockerJsUrl : 'https://unpkg.com/fanlocker@latest/dist/fanlocker.js';
