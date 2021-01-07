@@ -26,8 +26,7 @@ module.exports = class extends Component {
                     fold: '${fold}'
                 }
             }
-        };
-        `;
+        };`;
 
         return <Fragment>
             <script src={cdn('jquery', '3.3.1', 'dist/jquery.min.js')}></script>
