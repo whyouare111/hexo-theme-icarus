@@ -23,13 +23,15 @@ module.exports = class extends Component {
         const { article, plugins } = config;
         const { url_for, date, date_xml, __, _p } = helper;
 
+        const me = config.author;
+        const myUrl = config.url;
         const indexLaunguage = config.language || 'en';
         const language = page.lang || page.language || config.language || 'en';
         const cover = page.cover ? url_for(page.cover) : null;
 
         return <Fragment>
             {/* Main content */}
-            <div class="card">
+            <div class="card h-entry">
                 {/* Thumbnail */}
                 {cover ? <div class="card-image">
                     {index ? <a href={url_for(page.link || page.path)} class="image is-7by3">
@@ -44,20 +46,20 @@ module.exports = class extends Component {
                         <div class="level-left">
                             {/* Creation Date */}
                             {page.date && <span class="level-item" dangerouslySetInnerHTML={{
-                                __html: _p('article.created_at', `<time dateTime="${date_xml(page.date)}" title="${date_xml(page.date)}">${date(page.date)}</time>`)
+                                __html: _p('article.created_at', `<time class="dt-published" dateTime="${date_xml(page.date)}" title="${date_xml(page.date)}">${date(page.date)}</time>`)
                             }}></span>}
                             {/* Last Update Date */}
                             {page.updated && <span class="level-item" dangerouslySetInnerHTML={{
                                 __html: _p('article.updated_at', `<time dateTime="${date_xml(page.updated)}" title="${date_xml(page.updated)}">${date(page.updated)}</time>`)
                             }}></span>}
                             {/* author */}
-                            {page.author ? <span class="level-item"> {page.author} </span> : null}
+                            {page.author ? <a rel="author" class="level-item p-author" href={page.authorUrl}>{page.author}</a> : <a rel="author" class="level-item p-author" href={myUrl}>{me}</a>}
                             {/* Categories */}
                             {page.categories && page.categories.length ? <span class="level-item">
                                 {(() => {
                                     const categories = [];
                                     page.categories.forEach((category, i) => {
-                                        categories.push(<a class="link-muted" href={url_for(category.path)}>{category.name}</a>);
+                                        categories.push(<a class="link-muted p-category" href={url_for(category.path)}>{category.name}</a>);
                                         if (i < page.categories.length - 1) {
                                             categories.push(<span>&nbsp;/&nbsp;</span>);
                                         }
@@ -81,10 +83,10 @@ module.exports = class extends Component {
                     </div> : null}
                     {/* Title */}
                     <h1 class="title is-3 is-size-4-mobile">
-                        {index ? <a class="link-muted" href={url_for(page.link || page.path)}>{page.title}</a> : page.title}
+                        {index ? <a class="link-muted p-name u-url" href={url_for(page.link || page.path)}>{page.title}</a> : page.title}
                     </h1>
                     {/* Content/Excerpt */}
-                    <div class="content" dangerouslySetInnerHTML={{ __html: index && page.excerpt ? page.excerpt : page.content }}></div>
+                    <div class="content e-content" dangerouslySetInnerHTML={{ __html: index && page.excerpt ? page.excerpt : page.content }}></div>
                     {/* Licensing block */}
                     {!index && article && article.licenses && Object.keys(article.licenses)
                         ? <ArticleLicensing.Cacheable page={page} config={config} helper={helper} /> : null}

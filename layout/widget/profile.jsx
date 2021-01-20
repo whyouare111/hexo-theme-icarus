@@ -10,7 +10,8 @@ class Profile extends Component {
         return <div class="level is-mobile">
             {links.filter(link => typeof link === 'object').map(link => {
                 return <a class="level-item button is-transparent is-marginless"
-                    target="_blank" rel="noopener" title={link.name} href={link.url}>
+                   
+                    target="_blank" rel={(link.rel? (link.rel + " ") : "") + "noopener"} title={link.name} href={link.url}>
                     {'icon' in link ? <i class={link.icon}></i> : link.name}
                 </a>;
             })}
@@ -22,6 +23,7 @@ class Profile extends Component {
             avatar,
             avatarRounded,
             author,
+            url,
             authorTitle,
             location,
             counter,
@@ -33,12 +35,12 @@ class Profile extends Component {
             <div class="card-content">
                 <nav class="level">
                     <div class="level-item has-text-centered flex-shrink-1">
-                        <div>
+                        <div class="h-card">                            
                             <figure class="image is-128x128 mx-auto mb-2">
-                                <img class={'avatar' + (avatarRounded ? ' is-rounded' : '')} src={avatar} alt={author} />
+                                <img class={'u-photo avatar' + (avatarRounded ? ' is-rounded' : '')} src={avatar} alt={author} />
                             </figure>
-                            {author ? <p class="title is-size-4 is-block" style={{'line-height': 'inherit'}}>{author}</p> : null}
-                            {authorTitle ? <p class="is-size-6 is-block">{authorTitle}</p> : null}
+                            {author ? <a rel="me" href={url} class="title is-size-4 is-block u-url u-uid p-name p-nickname" style={{'line-height': 'inherit'}}>{author}</a> : null}
+                            {authorTitle ? <p class="is-size-6 is-block p-note">{authorTitle}</p> : null}                            
                             {location ? <p class="is-size-6 is-flex justify-content-center">
                                 <i class="fas fa-map-marker-alt mr-1"></i>
                                 <span>{location}</span>
@@ -88,6 +90,7 @@ Profile.Cacheable = cacheComponent(Profile, 'widget.profile', props => {
         gravatar,
         avatar_rounded = false,
         author = props.config.author,
+        url = props.config.url,
         author_title,
         location,
         follow_link,
@@ -120,7 +123,8 @@ Profile.Cacheable = cacheComponent(Profile, 'widget.profile', props => {
         return {
             name,
             url: url_for(link.url),
-            icon: link.icon
+            icon: link.icon,
+            rel: link.rel || ''
         };
     }) : null;
 
@@ -128,6 +132,7 @@ Profile.Cacheable = cacheComponent(Profile, 'widget.profile', props => {
         avatar: getAvatar(),
         avatarRounded: avatar_rounded,
         author,
+        url,
         authorTitle: author_title,
         location,
         counter: {
