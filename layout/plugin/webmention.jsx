@@ -12,8 +12,8 @@ class Webmention extends Component {
                 pingbackLink
             } = plugin;
             return <Fragment>
-                <link rel="webmention" href={link} />
-                <link rel="pingback" href={pingbackLink} />
+                {link ? <link rel="webmention" href={link} /> : null}
+                {pingbackLink ? <link rel="pingback" href={pingbackLink} /> : null}
             </Fragment>
         }
 
