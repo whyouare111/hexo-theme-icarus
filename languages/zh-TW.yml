@@ -63,3 +63,11 @@ search:
     no_result: '未找到搜索結果'
     untitled: '(無標題)'
     empty_preview: '(無內容預覽)'
+comment:
+    webmention-timeline:
+        into_the_fediverse: '進入聯邦宇宙'
+share:
+    webmention-mastodon:
+        reply: '回覆'
+        reblog: '轉嘟'
+        favourite: '最愛'        

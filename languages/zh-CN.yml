@@ -63,3 +63,11 @@ search:
     no_result: '未找到搜索结果'
     untitled: '(无标题)'
     empty_preview: '(无内容预览)'
+comment:
+    webmention-timeline:
+        into_the_fediverse: '进入联邦宇宙'
+share:
+    webmention-mastodon:
+        reply: '回复'
+        reblog: '转嘟'
+        favourite: '喜欢'

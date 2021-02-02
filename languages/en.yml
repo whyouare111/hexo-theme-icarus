@@ -63,3 +63,12 @@ search:
     no_result: 'No results for'
     untitled: '(Untitled)'
     empty_preview: '(No preview)'
+comment:
+    webmention-timeline:
+        into_the_fediverse: 'Into the Fediverse'
+share:
+    webmention-mastodon:
+        reply: 'Reply'
+        reblog: 'Boost'
+        favourite: 'Favourite'
+
